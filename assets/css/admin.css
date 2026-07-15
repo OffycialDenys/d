@@ -1,0 +1,52 @@
+.admin-body {
+    --color-primary: #1d4ed8;
+    --color-primary-strong: #1e40af;
+    --color-accent: #22c55e;
+}
+
+.admin-body .dashboard-hero {
+    background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+}
+
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.admin-actions form {
+    display: contents;
+}
+
+.admin-kpi {
+    border-left: 4px solid var(--color-primary);
+}
+
+.admin-body .sidebar {
+    background: #0f172a;
+    border-color: rgba(255, 255, 255, .08);
+}
+
+.admin-body .sidebar::after {
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0), #0f172a);
+}
+
+.admin-body .sidebar__nav a,
+.admin-body .sidebar__brand {
+    color: rgba(255, 255, 255, .76);
+}
+
+.admin-body .sidebar__nav a:hover,
+.admin-body .sidebar__nav a.is-active {
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
+}
+
+.admin-body .brand__mark {
+    background: #22c55e;
+    color: #06120a;
+}
+
+.admin-body .topbar {
+    background: rgba(248, 250, 252, .94);
+}

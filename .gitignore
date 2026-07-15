@@ -1,0 +1,25 @@
+# Dependencies / tooling
+.kilo/node_modules/
+node_modules/
+
+# Environment secrets (never commit real credentials)
+.env
+.env.*
+!.env.example
+
+# User-generated uploads (not source)
+uploads/
+assets/uploads/
+
+# Logs
+*.log
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+Thumbs.db
+
+# PHP caches
+.phpunit.cache
+vendor/

@@ -1,0 +1,5 @@
+INIT OK
+user_id=1221
+apex_avail=300
+nova_avail=120
+apex_deposits=2 nova=0

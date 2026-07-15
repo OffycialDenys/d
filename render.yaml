@@ -1,0 +1,40 @@
+# Render deployment for Nivaro Capital (PHP + MySQL).
+# This uses the Dockerfile so Apache + PDO MySQL are guaranteed available.
+# Render auto-injects the database connection variables below.
+
+databases:
+  - name: nivaro-db
+    databaseName: investment_platform
+    plan: free
+
+services:
+  - type: web
+    name: nivaro-capital
+    runtime: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /index.php?route=home
+    envVars:
+      - key: DB_ENABLED
+        value: "true"
+      - key: DB_HOST
+        fromDatabase:
+          name: nivaro-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: nivaro-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: nivaro-db
+          property: databaseName
+      - key: DB_USER
+        fromDatabase:
+          name: nivaro-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: nivaro-db
+          property: password
