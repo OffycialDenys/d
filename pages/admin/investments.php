@@ -77,6 +77,11 @@ usort($plans, fn($a, $b) => ($a['sort_order'] ?? 0) <=> ($b['sort_order'] ?? 0))
             </div>
 
             <div class="field">
+                <label for="dividend_yield">Dividend Yield (%)</label>
+                <input id="dividend_yield" name="dividend_yield" type="number" min="0" step="0.01" placeholder="0.33">
+            </div>
+
+            <div class="field">
                 <label for="roi">ROI Percentage (%)</label>
                 <input id="roi" name="roi" type="number" min="0" step="0.01" required placeholder="104.5">
             </div>

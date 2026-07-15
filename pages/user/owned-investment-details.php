@@ -293,6 +293,10 @@ $symbol    = strtoupper((string) ($plan['symbol'] ?? ''));
                     <span class="stat-item__label">Low<button type="button" class="info-icon" aria-label="Low. The lowest price the stock has dropped to during the day's trading." data-tooltip="The lowest price the stock has dropped to during the day's trading.">&#9432;</button></span>
                     <span class="stat-item__value"><?= money((float) ($plan['low'] ?? 0)) ?></span>
                 </div>
+                <div class="stat-item">
+                    <span class="stat-item__label">Dividend Yield<button type="button" class="info-icon" aria-label="Dividend Yield. The annual dividend paid by the company expressed as a percentage of its share price." data-tooltip="The annual dividend paid by the company expressed as a percentage of its share price.">&#9432;</button></span>
+                    <span class="stat-item__value"><?= !empty($plan['dividend_yield']) ? e(number_format((float) $plan['dividend_yield'], 2)) . '%' : '—' ?></span>
+                </div>
             </div>
         </article>
     </div>

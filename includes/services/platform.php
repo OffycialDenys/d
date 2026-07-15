@@ -1010,6 +1010,7 @@ function save_investment_plan(array $post): void
         'open' => max(0, (float) ($post['open'] ?? 0)),
         'high' => max(0, (float) ($post['high'] ?? 0)),
         'low' => max(0, (float) ($post['low'] ?? 0)),
+        'dividend_yield' => max(0, (float) ($post['dividend_yield'] ?? 0)),
     ];
 
     if ($plan['name'] === '' || $plan['min'] <= 0 || $plan['max'] < $plan['min']) {
