@@ -4,7 +4,7 @@
         <h2>Withdrawal Request</h2>
         <p class="muted">Withdrawable balance: <strong><?= e(money(customer_wallet(current_customer_id())['withdrawable'])) ?></strong></p>
         <form method="post" class="grid">
-            <div class="field"><label for="destination">Destination</label><input id="destination" name="destination" value="<?= e($_SESSION['platform']['bank']['method'] ?: 'Linked bank account') ?>"></div>
+            <div class="field"><label for="destination">Destination</label><input id="destination" name="destination" value="<?= e(customer_field(current_customer_id(), 'bank')['method'] ?? 'Linked bank account') ?>"></div>
             <div class="field"><label for="amount">Amount</label><input id="amount" name="amount" type="number" step="0.01" min="1" required></div>
             <div class="field"><label for="notes">Notes</label><textarea id="notes" name="notes"></textarea></div>
             <button class="button button--primary" type="submit">Submit Withdrawal</button>

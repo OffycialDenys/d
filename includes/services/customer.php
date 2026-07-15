@@ -83,6 +83,10 @@ function &customer_wallet(int $id): array
     $c = &customer($id);
     if (!isset($c['wallet']) || !is_array($c['wallet'])) {
         $c['wallet'] = default_wallet();
+    } else {
+        // Guarantee every expected key (e.g. 'referral') exists even if the
+        // stored wallet came from a source that omitted some columns.
+        $c['wallet'] = array_merge(default_wallet(), $c['wallet']);
     }
     return $c['wallet'];
 }

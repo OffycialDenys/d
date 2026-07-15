@@ -4,7 +4,7 @@
 <section class="grid grid--2"><article class="card stat-card"><span>Team Size</span><strong>0</strong></article><article class="card stat-card"><span>Total Earn</span><strong><?= e(money(customer_wallet(current_customer_id())['referral'])) ?></strong></article></section>
 <section class="grid">
     <h2>My Network Levels</h2>
-    <?php foreach ($_SESSION['platform']['referrals']['levels'] as $level): ?>
+    <?php foreach ($_SESSION['platform']['referral_levels'] as $level): ?>
         <article class="card"><div class="section-title"><div><h3>Level <?= e((string) $level['level']) ?></h3><p class="muted"><?= e($level['name']) ?></p></div><div><strong>Size: <?= e((string) $level['size']) ?></strong><br><strong>Earn: <?= e(money($level['earn'])) ?></strong></div></div></article>
     <?php endforeach; ?>
     <article class="card"><h3>Referral Rewards</h3><p>LV1 Investment Rebate: 11%</p><p>LV2 Investment Rebate: 2%</p><p>LV3 Investment Rebate: 1%</p></article>

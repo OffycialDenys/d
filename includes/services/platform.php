@@ -106,9 +106,20 @@ function initialize_demo_state(): void
     $_SESSION['auth_user'] ??= (int) ($_SESSION['platform']['user']['id'] ?? 0);
 
     // Normalize every customer record so the accessors have a complete shape.
+    // Each sub-record is guaranteed to exist, and wallet/bank are merged with
+    // their defaults so views can read any key without a warning.
     foreach ($_SESSION['platform']['customers'] as $id => &$c) {
-        $c['wallet'] = $c['wallet'] ?? default_wallet();
+        $c['wallet'] = is_array($c['wallet'] ?? null) ? array_merge(default_wallet(), $c['wallet']) : default_wallet();
+        $c['orders'] = $c['orders'] ?? [];
+        $c['transactions'] = $c['transactions'] ?? [];
+        $c['deposits'] = $c['deposits'] ?? [];
+        $c['withdrawals'] = $c['withdrawals'] ?? [];
+        $c['notifications'] = $c['notifications'] ?? [];
+        $c['tickets'] = $c['tickets'] ?? [];
+        $c['bank'] = is_array($c['bank'] ?? null) ? array_merge(['holder' => '', 'account' => '', 'method' => ''], $c['bank']) : ['holder' => '', 'account' => '', 'method' => ''];
         $c['claimed_rewards'] = $c['claimed_rewards'] ?? [];
+        $c['activities'] = $c['activities'] ?? [];
+        $c['admin_notes'] = $c['admin_notes'] ?? [];
         $c['metrics'] = $c['metrics'] ?? [];
         recalculate_customer_metrics((int) $id);
     }

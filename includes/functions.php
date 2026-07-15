@@ -78,7 +78,9 @@ function status_class(string $status): string
 
 function current_user(): array
 {
-    return $_SESSION['platform']['user'];
+    // Defensive fallback: a missing/cleared session user must not produce
+    // "array offset on value of null" when views read $user['username'], etc.
+    return $_SESSION['platform']['user'] ?? [];
 }
 
 /**

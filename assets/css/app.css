@@ -13,6 +13,7 @@
     /* Promote to its own compositor layer so the backdrop-filter blur does not
        force a full repaint of the header on every scroll frame. */
     will-change: transform;
+    min-width: 0;
 }
 
 .brand {
@@ -20,6 +21,7 @@
     align-items: center;
     gap: .65rem;
     font-weight: 900;
+    min-width: 0;
 }
 
 .brand__mark {
@@ -586,7 +588,7 @@ fieldset.form-grid {
  * two/three-up layout as space allows.
  */
 .orders-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     align-items: start;
 }
 
@@ -990,6 +992,40 @@ fieldset.form-grid {
         font-size: .72rem;
         font-weight: 900;
     }
+
+    /* Prevent the mobile nav dropdown from overflowing small screens */
+    .site-nav {
+        max-width: calc(100vw - 2rem);
+        max-height: calc(100vh - 84px);
+        overflow-y: auto;
+    }
+
+    /* Long unbreakable codes/addresses must wrap instead of forcing
+       horizontal scroll on mobile. */
+    .copy-box {
+        font-size: 1.05rem;
+        word-break: break-all;
+    }
+    .copy-box span {
+        word-break: break-all;
+        overflow-wrap: anywhere;
+    }
+
+    /* Stack the two-column detail hero on phones so the price block
+       never exceeds the viewport width. */
+    .details-hero {
+        grid-template-columns: 1fr;
+    }
+    .details-hero__price-info {
+        text-align: left;
+    }
+
+    /* Allow any wide inline code/address text to wrap */
+    .mono,
+    [data-wallet-address] {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
 }
 
 /* STOCK & CRYPTO INVESTMENT MARKETPLACE STYLES */
@@ -1116,7 +1152,7 @@ fieldset.form-grid {
 
 .premium-card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: var(--space-4);
 }
 .asset-premium-card {
@@ -1535,7 +1571,7 @@ fieldset.form-grid {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     gap: var(--space-4);
 }
 .portfolio-card-premium {

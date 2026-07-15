@@ -52,8 +52,19 @@ function db_login_user(string $identity, string $password): bool
     }
 
     $_SESSION['auth_user'] = (int) $user['id'];
-    $_SESSION['platform']['user'] = db_user_to_session($user);
-    $_SESSION['platform']['customers'][$user['id']] = $_SESSION['platform']['user'];
+    $sessionUser = db_user_to_session($user);
+    $_SESSION['platform']['user'] = $sessionUser;
+    // Build a COMPLETE per-customer record (wallet, bank, sub-records) so the
+    // app sees the same shape as the session-demo store. Storing only the bare
+    // user array previously left 'bank' and other keys missing, causing
+    // "array offset on null" warnings on the withdrawal/bank pages.
+    $_SESSION['platform']['customers'][$user['id']] = build_customer(
+        $sessionUser,
+        default_wallet(),
+        [], [], [], [], [], [],
+        ['holder' => '', 'account' => '', 'method' => ''],
+        []
+    );
     record_activity('user', 'User signed in');
     return true;
 }
@@ -119,7 +130,13 @@ function db_register_user(array $input): bool
         'membership_level' => 'Starter',
     ]);
     $_SESSION['platform']['user'] = $sessionUser;
-    $_SESSION['platform']['customers'][$id] = $sessionUser;
+    $_SESSION['platform']['customers'][$id] = build_customer(
+        $sessionUser,
+        default_wallet(),
+        [], [], [], [], [], [],
+        ['holder' => '', 'account' => '', 'method' => ''],
+        []
+    );
     $_SESSION['auth_user'] = (int) $id;
     record_activity('user', 'New user registration completed');
     return true;
